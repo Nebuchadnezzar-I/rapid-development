@@ -1,0 +1,3 @@
+- [x] Server
+- [-] Add ports apps
+- [ ] tRPC
