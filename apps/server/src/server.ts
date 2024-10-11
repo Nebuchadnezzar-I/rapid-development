@@ -1,12 +1,25 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import cors from 'cors';
+import * as trpcExpress from '@trpc/server/adapters/express';
+import { appRouter } from './router';
+import { createContext } from './trpc';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const port = 4000;
 
-app.get('/', (_req: Request, res: Response) => {
-    res.send({ message: 'Hello from the server!' });
-});
+app.use(cors({
+  origin: '*',
+  credentials: true
+}));
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.use(
+  '/trpc',
+  trpcExpress.createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  })
+);
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
