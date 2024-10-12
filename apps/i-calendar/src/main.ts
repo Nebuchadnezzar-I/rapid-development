@@ -1,5 +1,5 @@
+import { trpc } from './trpc.ts';
 import './style.css';
-import { trpc } from './trpc';
 
 async function fetchGreeting() {
     try {
