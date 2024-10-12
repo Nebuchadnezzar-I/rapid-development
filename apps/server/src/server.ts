@@ -7,17 +7,19 @@ import { createContext } from './trpc';
 const app = express();
 const port = 4000;
 
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
+app.use(
+    cors({
+        origin: '*',
+        credentials: true,
+    }),
+);
 
 app.use(
-  '/trpc',
-  trpcExpress.createExpressMiddleware({
-    router: appRouter,
-    createContext,
-  })
+    '/trpc',
+    trpcExpress.createExpressMiddleware({
+        router: appRouter,
+        createContext,
+    }),
 );
 
 app.listen(port, () => {
